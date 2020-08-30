@@ -1,8 +1,10 @@
 package com.nowcoder.community;
 
 import com.nowcoder.community.dao.DiscussPostMapper;
+import com.nowcoder.community.dao.LoginTicketMapper;
 import com.nowcoder.community.dao.UserMapper;
 import com.nowcoder.community.entity.DiscussPost;
+import com.nowcoder.community.entity.LoginTicket;
 import com.nowcoder.community.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.BeansException;
@@ -11,12 +13,15 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.test.context.ContextConfiguration;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
 @SpringBootTest
 @ContextConfiguration(classes = CommunityApplication.class)  // 指定配置类
 public class MapperTests implements ApplicationContextAware {
+    @Resource
+    private LoginTicketMapper ticketMapper;
     private ApplicationContext applicationContext;
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -51,6 +56,24 @@ public class MapperTests implements ApplicationContextAware {
 
         int rows = discussPostMapper.selectDiscussPostsRows(149);
         System.out.println(rows);
+    }
+
+    @Test
+    public void testInsertLoginTicket() {
+        LoginTicket loginTicket = new LoginTicket();
+        loginTicket.setUserId(101);
+        loginTicket.setTicket("abc");
+        loginTicket.setStatus(0);
+        loginTicket.setExpired(new Date(System.currentTimeMillis() + 1000 * 60 * 10));  // 十分钟
+
+        ticketMapper.insertLoginTicket(loginTicket);
+    }
+
+    @Test
+    public void testSelctAndUpdateLoginTicket() {
+        LoginTicket loginTicket = ticketMapper.selectTicket("abc");
+        System.out.println(loginTicket);
+        ticketMapper.updateStatus("abc", 1);
     }
 
 }
