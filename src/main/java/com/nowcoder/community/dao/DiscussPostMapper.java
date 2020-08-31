@@ -14,6 +14,10 @@ public interface DiscussPostMapper {
 
     int selectDiscussPostsRows(@Param("userId") int userId);  // 需要通过动态SQL使用该参数，且该方法只有这一个参数，此时必须写上该注解
 
+    int insertDiscussPost(DiscussPost discussPost);
+
+    DiscussPost selectDiscussPostById(int id);
+
 
 
 }
