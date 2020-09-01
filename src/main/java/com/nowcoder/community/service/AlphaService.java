@@ -62,9 +62,6 @@ public class AlphaService {
         discussPost.setCreateTime(new Date());
         discussPostMapper.insertDiscussPost(discussPost);
 
-        // 人为制造错误
-        Integer.valueOf("abc");
-
         return "ok";
     }
 
@@ -93,9 +90,6 @@ public class AlphaService {
                 discussPost.setContent("我是新人");
                 discussPost.setCreateTime(new Date());
                 discussPostMapper.insertDiscussPost(discussPost);
-
-                // 人为制造错误
-                Integer.valueOf("abc");
 
                 return "ok";
             }
