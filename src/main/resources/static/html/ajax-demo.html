@@ -14,22 +14,18 @@
         function send() {
             $.post(
                 "/community/alpha/ajax",
-                {"name": "张三", "age": 23},
-                function (data) {
+                {"name":"张三","age":23},
+                function(data) {
                     console.log(typeof(data));
                     console.log(data);
 
-                    var data = $.parseJSON(data);
+                    data = $.parseJSON(data);
                     console.log(typeof(data));
                     console.log(data.code);
                     console.log(data.msg);
                 }
             );
-
         }
     </script>
-
-
-
 </body>
 </html>

@@ -1,6 +1,5 @@
 package com.nowcoder.community.util;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,7 @@ import javax.mail.internet.MimeMessage;
 @Component
 public class MailClient {
 
-    Logger logger = LoggerFactory.getLogger(MailClient.class);
+    private static final Logger logger = LoggerFactory.getLogger(MailClient.class);
 
     @Autowired
     private JavaMailSender mailSender;
@@ -26,17 +25,15 @@ public class MailClient {
     public void sendMail(String to, String subject, String content) {
         try {
             MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper messageHelper = new MimeMessageHelper(message);
-            messageHelper.setFrom(from);
-            messageHelper.setTo(to);
-            messageHelper.setSubject(subject);
-            messageHelper.setText(content, true);
-            mailSender.send(messageHelper.getMimeMessage());
+            MimeMessageHelper helper = new MimeMessageHelper(message);
+            helper.setFrom(from);
+            helper.setTo(to);
+            helper.setSubject(subject);
+            helper.setText(content, true);
+            mailSender.send(helper.getMimeMessage());
         } catch (MessagingException e) {
-            logger.error("邮件发送失败" + e.getMessage());
+            logger.error("发送邮件失败:" + e.getMessage());
         }
-
     }
-
 
 }

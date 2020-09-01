@@ -5,19 +5,17 @@ import com.nowcoder.community.entity.DiscussPost;
 import com.nowcoder.community.util.SensitiveFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.HtmlUtils;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 public class DiscussPostService {
 
-    @Resource
+    @Autowired
     private DiscussPostMapper discussPostMapper;
 
-    @Resource
+    @Autowired
     private SensitiveFilter sensitiveFilter;
 
     public List<DiscussPost> findDiscussPosts(int userId, int offset, int limit) {
@@ -25,7 +23,7 @@ public class DiscussPostService {
     }
 
     public int findDiscussPostRows(int userId) {
-        return discussPostMapper.selectDiscussPostsRows(userId);
+        return discussPostMapper.selectDiscussPostRows(userId);
     }
 
     public int addDiscussPost(DiscussPost post) {

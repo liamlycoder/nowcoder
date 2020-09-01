@@ -7,6 +7,7 @@ import com.nowcoder.community.service.MessageService;
 import com.nowcoder.community.service.UserService;
 import com.nowcoder.community.util.CommunityUtil;
 import com.nowcoder.community.util.HostHolder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,19 +15,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.Resource;
 import java.util.*;
 
 @Controller
 public class MessageController {
 
-    @Resource
+    @Autowired
     private MessageService messageService;
 
-    @Resource
+    @Autowired
     private HostHolder hostHolder;
 
-    @Resource
+    @Autowired
     private UserService userService;
 
     // 私信列表

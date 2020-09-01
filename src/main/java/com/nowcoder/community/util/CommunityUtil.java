@@ -9,12 +9,15 @@ import java.util.Map;
 import java.util.UUID;
 
 public class CommunityUtil {
+
     // 生成随机字符串
     public static String generateUUID() {
         return UUID.randomUUID().toString().replaceAll("-", "");
     }
 
-    // MD5加密: 原始字符串混合salt值后再进行MD5加密处理
+    // MD5加密
+    // hello -> abc123def456
+    // hello + 3e4a8 -> abc123def456abc
     public static String md5(String key) {
         if (StringUtils.isBlank(key)) {
             return null;
@@ -23,15 +26,15 @@ public class CommunityUtil {
     }
 
     public static String getJSONString(int code, String msg, Map<String, Object> map) {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("code", code);
-        jsonObject.put("msg", msg);
+        JSONObject json = new JSONObject();
+        json.put("code", code);
+        json.put("msg", msg);
         if (map != null) {
             for (String key : map.keySet()) {
-                jsonObject.put(key, map.get(key));
+                json.put(key, map.get(key));
             }
         }
-        return jsonObject.toJSONString();
+        return json.toJSONString();
     }
 
     public static String getJSONString(int code, String msg) {
@@ -44,8 +47,9 @@ public class CommunityUtil {
 
     public static void main(String[] args) {
         Map<String, Object> map = new HashMap<>();
-        map.put("name", "wangbeibei");
-        map.put("age", 20);
+        map.put("name", "zhangsan");
+        map.put("age", 25);
         System.out.println(getJSONString(0, "ok", map));
     }
+
 }

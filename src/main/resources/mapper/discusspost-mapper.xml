@@ -23,7 +23,7 @@
         limit #{offset}, #{limit}
     </select>
 
-    <select id="selectDiscussPostsRows" resultType="int">
+    <select id="selectDiscussPostRows" resultType="int">
         select count(id)
         from discuss_post
         where status != 2
@@ -31,7 +31,7 @@
             and user_id = #{userId}
         </if>
     </select>
-    
+
     <insert id="insertDiscussPost" parameterType="DiscussPost">
         insert into discuss_post(<include refid="insertFields"></include>)
         values(#{userId},#{title},#{content},#{type},#{status},#{createTime},#{commentCount},#{score})
@@ -46,6 +46,5 @@
     <update id="updateCommentCount">
         update discuss_post set comment_count = #{commentCount} where id = #{id}
     </update>
-
 
 </mapper>
